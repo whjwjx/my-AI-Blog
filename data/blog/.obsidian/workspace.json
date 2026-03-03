@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2026-03-03.md",
+                "file": "test-post.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-03"
+              "title": "test-post"
             }
           }
         ],
@@ -109,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2026-03-03.md",
+                "file": "test-post.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "2026-03-03 的反向链接列表"
+              "title": "test-post 的反向链接列表"
             }
           },
           {
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2026-03-03.md",
+                "file": "test-post.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "2026-03-03 的出链列表"
+              "title": "test-post 的出链列表"
             }
           },
           {
@@ -171,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2026-03-03.md",
+                "file": "test-post.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "2026-03-03 的大纲"
+              "title": "test-post 的大纲"
             }
           }
         ]
@@ -200,8 +200,8 @@
   },
   "active": "ee9a87534d7ee561",
   "lastOpenFiles": [
-    "test-post.md",
     "2026-03-03.md",
+    "test-post.md",
     "生活/test-post 1.md",
     "生活/生活思考.md",
     "生活",
