@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'AI 全栈开发者的技术博客',
   language: 'zh-CN',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://blog.huajiang.wang',
+  siteUrl: 'https://huajiang.wang',
   siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
