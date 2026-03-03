@@ -20,7 +20,7 @@ export const SearchProvider = ({ children }) => {
             id: 'homepage',
             name: 'Homepage',
             keywords: '',
-            shortcut: ['h', 'h'],
+            shortcut: ['h'],
             section: 'Home',
             perform: () => router.push(`/${locale}/`),
           },
@@ -37,7 +37,6 @@ export const SearchProvider = ({ children }) => {
           return json.map((post: CoreContent<Blog>) => {
             const isChinese = post.language === 'zh-CN'
             const langPrefix = isChinese ? '[中文] ' : '[EN] '
-            
             return {
               id: post.path,
               name: langPrefix + post.title,
