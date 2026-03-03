@@ -28,7 +28,11 @@ export async function generateMetadata(props: {
 }): Promise<Metadata | undefined> {
   const params = await props.params
   const { locale } = params
-  const slug = decodeURI(params.slug.join('/'))
+  let slug = decodeURI(params.slug.join('/'))
+  // Handle cases where the slug might include the language prefix (e.g. from search results)
+  if (slug.startsWith(`${locale}/`)) {
+    slug = slug.substring(locale.length + 1)
+  }
   const post = allBlogs.find((p) => p.slug === slug && p.language === locale)
   const authorList = post?.authors || ['default']
   const authorDetails = authorList.map((author) => {
@@ -87,7 +91,11 @@ export default async function Page(props: { params: Promise<{ locale: Locale; sl
   const params = await props.params
   const { locale } = params
   const dict = await getDictionary(locale)
-  const slug = decodeURI(params.slug.join('/'))
+  let slug = decodeURI(params.slug.join('/'))
+  // Handle cases where the slug might include the language prefix (e.g. from search results)
+  if (slug.startsWith(`${locale}/`)) {
+    slug = slug.substring(locale.length + 1)
+  }
   // Filter out drafts in production and filter by language
   const filteredBlogs = allBlogs.filter((post) => post.language === locale)
   const sortedCoreContents = allCoreContent(sortPosts(filteredBlogs))

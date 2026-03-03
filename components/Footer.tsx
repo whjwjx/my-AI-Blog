@@ -1,8 +1,9 @@
 import Link from './Link'
 import siteMetadata from '@/data/siteMetadata'
 import SocialIcon from '@/components/social-icons'
+import { Dictionary } from '@/dictionaries/i18n-config'
 
-export default function Footer({ dict }: { dict: any }) {
+export default function Footer({ dict }: { dict: Dictionary }) {
   return (
     <footer>
       <div className="mt-24 mb-16 flex flex-col items-center">

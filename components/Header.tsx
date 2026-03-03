@@ -6,9 +6,9 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 import LanguageSwitch from './LanguageSwitch'
-import { Locale } from '@/dictionaries/i18n-config'
+import { Locale, Dictionary } from '@/dictionaries/i18n-config'
 
-const Header = ({ dict, locale }: { dict: any; locale: Locale }) => {
+const Header = ({ dict, locale }: { dict: Dictionary; locale: Locale }) => {
   let headerClass = 'flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10'
   if (siteMetadata.stickyNav) {
     headerClass += ' sticky top-0 z-50'

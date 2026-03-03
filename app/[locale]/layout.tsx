@@ -23,11 +23,13 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ locale }))
 }
 
-export async function generateMetadata(props: { params: Promise<{ locale: Locale }> }): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ locale: Locale }>
+}): Promise<Metadata> {
   const params = await props.params
   const { locale } = params
   const dict = await getDictionary(locale)
-  
+
   return {
     metadataBase: new URL(siteMetadata.siteUrl),
     title: {

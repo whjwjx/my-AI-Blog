@@ -5,9 +5,9 @@ import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'bo
 import { Fragment, useState, useEffect, useRef } from 'react'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
-import { Locale } from '@/dictionaries/i18n-config'
+import { Locale, Dictionary } from '@/dictionaries/i18n-config'
 
-const MobileNav = ({ dict, locale }: { dict: any; locale: Locale }) => {
+const MobileNav = ({ dict, locale }: { dict: Dictionary; locale: Locale }) => {
   const [navShow, setNavShow] = useState(false)
   const [mounted, setMounted] = useState(false)
   const navRef = useRef(null)
