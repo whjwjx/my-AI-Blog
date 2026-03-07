@@ -2,7 +2,7 @@
 title: '我的第一篇测试文章'
 date: '2026-03-03'
 tags: ['Next.js', 'Tailwind', 'AI']
-draft: false
+draft: true
 summary: '这是一篇用于测试博客初始化效果的文章，展示了文章的布局、代码高亮以及图片显示等功能。'
 authors: ['default']
 ---
