@@ -8,6 +8,8 @@ import NewsletterForm from 'pliny/ui/NewsletterForm'
 import { useParams } from 'next/navigation'
 import { Locale } from '@/dictionaries/i18n-config'
 import { getDictionary } from '@/dictionaries/get-dictionary'
+import { Spotlight } from '@/components/ui/Spotlight'
+import { GridBackground } from '@/components/ui/GridBackground'
 
 const MAX_DISPLAY = 5
 
@@ -16,29 +18,35 @@ export default function Home({ posts, dict, locale }) {
 
   return (
     <>
-      <div className="border-b border-gray-200 py-12 dark:border-gray-700">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center md:space-y-6">
-          <h1 className="text-4xl leading-tight font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-7xl dark:text-gray-100">
-            {dict.site.title}
-          </h1>
-          <p className="max-w-2xl text-lg leading-relaxed text-gray-600 sm:text-xl dark:text-gray-400">
-            {dict.site.description}
-          </p>
-          <div className="flex justify-center space-x-4 pt-4">
-            <Link
-              href={`/${locale}/blog`}
-              className="bg-primary-500 hover:bg-primary-600 rounded-lg px-6 py-3 text-white transition-colors"
-            >
-              {dict.nav.blog}
-            </Link>
-            <Link
-              href={`/${locale}/about`}
-              className="hover:border-primary-500 dark:hover:border-primary-400 rounded-lg border border-gray-200 px-6 py-3 transition-colors dark:border-gray-700"
-            >
-              {dict.nav.about}
-            </Link>
+      <div className="relative overflow-hidden border-b border-gray-200 py-12 dark:border-gray-700">
+        <Spotlight
+          className="-top-40 left-0 md:-top-20 md:left-60"
+          fill="var(--color-primary-500)"
+        />
+        <GridBackground>
+          <div className="flex flex-col items-center justify-center space-y-4 text-center md:space-y-6">
+            <h1 className="text-4xl leading-tight font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-7xl dark:text-gray-100">
+              {dict.site.title}
+            </h1>
+            <p className="max-w-2xl text-lg leading-relaxed text-gray-600 sm:text-xl dark:text-gray-400">
+              {dict.site.description}
+            </p>
+            <div className="flex justify-center space-x-4 pt-4">
+              <Link
+                href={`/${locale}/blog`}
+                className="bg-primary-500 hover:bg-primary-600 rounded-lg px-6 py-3 text-white transition-colors"
+              >
+                {dict.nav.blog}
+              </Link>
+              <Link
+                href={`/${locale}/about`}
+                className="hover:border-primary-500 dark:hover:border-primary-400 rounded-lg border border-gray-200 px-6 py-3 transition-colors dark:border-gray-700"
+              >
+                {dict.nav.about}
+              </Link>
+            </div>
           </div>
-        </div>
+        </GridBackground>
       </div>
       <div className="space-y-4">
         <div className="pt-12 pb-8 text-center md:space-y-5">

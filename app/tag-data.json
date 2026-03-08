@@ -1,8 +1,10 @@
 {
+  "en-blog": 1,
   "en-nextjs": 1,
-  "en-tailwind": 1,
   "en-ai": 1,
+  "en-full-stack": 1,
+  "zh-CN-blog": 1,
   "zh-CN-nextjs": 1,
-  "zh-CN-tailwind": 1,
-  "zh-CN-ai": 1
+  "zh-CN-ai": 1,
+  "zh-CN-full-stack": 1
 }

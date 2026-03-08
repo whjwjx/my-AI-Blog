@@ -4976,7 +4976,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.0.0":
+"clsx@npm:^2.0.0, clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: acd3e1ab9d8a433ecb3cc2f6a05ab95fe50b4a3cfc5ba47abb6cbf3754585fcb87b84e90c822a1f256c4198e3b41c7f6c391577ffc8678ad587fc0976b24fd57
@@ -9039,7 +9039,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mini-svg-data-uri@npm:^1.2.3":
+"mini-svg-data-uri@npm:^1.2.3, mini-svg-data-uri@npm:^1.4.4":
   version: 1.4.4
   resolution: "mini-svg-data-uri@npm:1.4.4"
   bin:
@@ -11600,6 +11600,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tailwind-merge@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "tailwind-merge@npm:3.5.0"
+  checksum: 34d1ba25a9e55fdc0885a14221650623472b70c969b8da0dd494753a311318469f203b21fc2278d9b679d41c04451b5e2c725d14d0f510ca07feae903c6479d3
+  languageName: node
+  linkType: hard
+
 "tailwind-nextjs-starter-blog@workspace:.":
   version: 0.0.0-use.local
   resolution: "tailwind-nextjs-starter-blog@workspace:."
@@ -11619,6 +11626,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^8.54.0
     "@typescript-eslint/parser": ^8.54.0
     body-scroll-lock: ^3.1.5
+    clsx: ^2.1.1
     contentlayer2: 0.5.8
     cross-env: ^10.1.0
     esbuild: 0.27.3
@@ -11633,6 +11641,7 @@ __metadata:
     husky: ^9.1.7
     image-size: 2.0.2
     lint-staged: ^16.2.7
+    mini-svg-data-uri: ^1.4.4
     negotiator: ^1.0.0
     next: 15.5.12
     next-contentlayer2: 0.5.8
@@ -11655,6 +11664,7 @@ __metadata:
     remark-gfm: ^4.0.1
     remark-github-blockquote-alert: ^2.0.1
     remark-math: ^6.0.0
+    tailwind-merge: ^3.5.0
     tailwindcss: ^4.1.18
     typescript: ^5.9.3
     unist-util-visit: ^5.1.0
