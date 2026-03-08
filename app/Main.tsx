@@ -17,14 +17,14 @@ export default function Home({ posts, dict, locale }) {
   return (
     <>
       <div className="border-b border-gray-200 py-12 dark:border-gray-700">
-        <div className="space-y-4 md:space-y-6">
-          <h1 className="from-primary-600 to-primary-400 dark:from-primary-400 dark:to-primary-200 bg-linear-to-r bg-clip-text text-4xl leading-tight font-extrabold tracking-tight text-transparent sm:text-5xl md:text-7xl">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center md:space-y-6">
+          <h1 className="text-4xl leading-tight font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-7xl dark:text-gray-100">
             {dict.site.title}
           </h1>
           <p className="max-w-2xl text-lg leading-relaxed text-gray-600 sm:text-xl dark:text-gray-400">
             {dict.site.description}
           </p>
-          <div className="flex space-x-4 pt-4">
+          <div className="flex justify-center space-x-4 pt-4">
             <Link
               href={`/${locale}/blog`}
               className="bg-primary-500 hover:bg-primary-600 rounded-lg px-6 py-3 text-white transition-colors"
@@ -41,12 +41,12 @@ export default function Home({ posts, dict, locale }) {
         </div>
       </div>
       <div className="space-y-4">
-        <div className="pt-12 pb-8 md:space-y-5">
+        <div className="pt-12 pb-8 text-center md:space-y-5">
           <h2 className="text-2xl leading-9 font-bold tracking-tight text-gray-900 sm:text-3xl sm:leading-10 md:text-4xl dark:text-gray-100">
             {dict.blog.all_posts}
           </h2>
         </div>
-        <div className="grid gap-4 sm:grid-cols-1 md:gap-6">
+        <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-1 md:gap-6">
           {!posts.length && dict.blog.no_posts}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
             const { slug, date, title, summary, tags } = post
@@ -87,7 +87,7 @@ export default function Home({ posts, dict, locale }) {
         </div>
       </div>
       {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base leading-6 font-medium">
+        <div className="flex justify-center text-base leading-6 font-medium">
           <Link
             href={`/${locale}/blog`}
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
