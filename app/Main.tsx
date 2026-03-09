@@ -12,7 +12,18 @@ import { Spotlight } from '@/components/ui/Spotlight'
 import { GridBackground } from '@/components/ui/GridBackground'
 import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card'
 import { OrbitingCircles } from '@/components/magicui/orbiting-circles'
-import { Trae, Dify, Claude, OpenClaw, Ollama, Gemini, Glama, MCP } from '@lobehub/icons'
+import {
+  Trae,
+  Dify,
+  ClaudeCode,
+  OpenClaw,
+  Ollama,
+  Gemini,
+  DeepSeek,
+  ModelScope,
+  OpenAI,
+  MCP,
+} from '@lobehub/icons'
 
 const MAX_DISPLAY = 5
 
@@ -27,13 +38,15 @@ export default function Home({ posts, dict, locale }) {
             <OrbitingCircles iconSize={50} radius={260} speed={0.8} randomSpeed>
               <Trae.Color size={50} />
               <Dify.Color size={50} />
-              <Claude.Color size={50} />
+              <ClaudeCode.Color size={50} />
               <OpenClaw.Color size={50} />
             </OrbitingCircles>
             <OrbitingCircles iconSize={40} radius={400} reverse speed={1.5} randomSpeed>
               <Ollama size={40} />
               <Gemini.Color size={40} />
-              <Glama size={40} />
+              <DeepSeek.Color size={40} />
+              <ModelScope.Color size={40} />
+              <OpenAI size={40} />
               <MCP size={40} />
             </OrbitingCircles>
           </div>
