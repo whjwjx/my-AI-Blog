@@ -34,37 +34,37 @@ export default function Home({ posts, dict, locale }) {
 
   return (
     <>
-      <div className="relative min-h-[750px] overflow-hidden border-b border-gray-200 pt-12 pb-32 dark:border-gray-700">
-        <GridBackground className="min-h-[750px]">
+      <div className="relative min-h-[700px] overflow-hidden border-b border-gray-200 pt-8 pb-24 dark:border-gray-700">
+        <GridBackground className="min-h-[700px]">
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <OrbitingCircles iconSize={50} radius={260} speed={0.8} randomSpeed>
-              <Trae.Color size={50} />
-              <Dify.Color size={50} />
-              <ClaudeCode.Color size={50} />
-              <OpenClaw.Color size={50} />
+            <OrbitingCircles iconSize={40} radius={220} speed={0.8} randomSpeed>
+              <Trae.Color size={40} />
+              <Dify.Color size={40} />
+              <ClaudeCode.Color size={40} />
+              <OpenClaw.Color size={40} />
             </OrbitingCircles>
-            <OrbitingCircles iconSize={40} radius={400} reverse speed={1.5} randomSpeed>
-              <Ollama size={40} />
-              <Gemini.Color size={40} />
-              <DeepSeek.Color size={40} />
-              <ModelScope.Color size={40} />
-              <OpenAI size={40} />
-              <MCP size={40} />
+            <OrbitingCircles iconSize={30} radius={340} reverse speed={1.5} randomSpeed>
+              <Ollama size={30} />
+              <Gemini.Color size={30} />
+              <DeepSeek.Color size={30} />
+              <ModelScope.Color size={30} />
+              <OpenAI size={30} />
+              <MCP size={30} />
             </OrbitingCircles>
           </div>
-          <CardContainer className="inter-var" containerClassName="py-10">
-            <CardBody className="group/card relative h-auto w-auto rounded-xl bg-transparent p-6 dark:bg-transparent">
-              <CardItem translateZ="80" className="mb-6 flex w-full justify-center">
+          <CardContainer className="inter-var" containerClassName="py-4">
+            <CardBody className="group/card relative h-auto w-auto rounded-xl bg-transparent p-4 dark:bg-transparent">
+              <CardItem translateZ="80" className="mb-4 flex w-full justify-center">
                 <Image
                   src="/static/images/avatar.png"
                   alt="avatar"
-                  width={140}
-                  height={140}
+                  width={120}
+                  height={120}
                   className="rounded-full border-4 border-white/50 shadow-2xl backdrop-blur-sm transition-transform duration-500 group-hover/card:scale-110 dark:border-gray-800/50"
                 />
               </CardItem>
               <CardItem translateZ="50" className="w-full text-center">
-                <h1 className="bg-gradient-to-b from-gray-900 to-gray-600 bg-clip-text text-3xl font-extrabold tracking-tighter text-transparent sm:text-5xl md:text-6xl dark:from-gray-100 dark:to-gray-400">
+                <h1 className="bg-gradient-to-b from-gray-900 to-gray-600 bg-clip-text text-2xl font-extrabold tracking-tighter text-transparent sm:text-4xl md:text-5xl dark:from-gray-100 dark:to-gray-400">
                   {dict.site.title.split(locale === 'zh-CN' ? '王华江' : 'Hua Jiang')[0]}
                   <TypingAnimation words={dict.site.typingWords} />
                 </h1>
@@ -72,20 +72,20 @@ export default function Home({ posts, dict, locale }) {
               <CardItem
                 as="p"
                 translateZ="60"
-                className="mx-auto mt-4 max-w-xl text-center text-lg leading-relaxed text-balance text-gray-600 sm:text-xl dark:text-gray-400"
+                className="mx-auto mt-3 max-w-lg text-center text-base leading-relaxed text-balance text-gray-600 sm:text-lg dark:text-gray-400"
               >
                 {dict.site.description}
               </CardItem>
-              <CardItem translateZ="100" className="mt-4 flex w-full justify-center space-x-4 pt-4">
+              <CardItem translateZ="100" className="mt-4 flex w-full justify-center space-x-4 pt-2">
                 <Link
                   href={`/${locale}/blog`}
-                  className="bg-primary-500 hover:bg-primary-600 rounded-lg px-6 py-3 text-white transition-colors"
+                  className="bg-primary-500 hover:bg-primary-600 rounded-lg px-5 py-2.5 text-white transition-colors"
                 >
                   {dict.nav.blog}
                 </Link>
                 <Link
                   href={`/${locale}/about`}
-                  className="hover:border-primary-500 dark:hover:border-primary-400 rounded-lg border border-gray-200 px-6 py-3 transition-colors dark:border-gray-700"
+                  className="hover:border-primary-500 dark:hover:border-primary-400 rounded-lg border border-gray-200 px-5 py-2.5 transition-colors dark:border-gray-700"
                 >
                   {dict.nav.about}
                 </Link>
