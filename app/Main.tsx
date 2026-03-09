@@ -12,6 +12,7 @@ import { Spotlight } from '@/components/ui/Spotlight'
 import { GridBackground } from '@/components/ui/GridBackground'
 import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card'
 import { OrbitingCircles } from '@/components/magicui/orbiting-circles'
+import Image from '@/components/Image'
 import {
   Trae,
   Dify,
@@ -52,8 +53,17 @@ export default function Home({ posts, dict, locale }) {
           </div>
           <CardContainer className="inter-var" containerClassName="py-10">
             <CardBody className="group/card relative h-auto w-auto rounded-xl bg-transparent p-6 dark:bg-transparent">
+              <CardItem translateZ="80" className="mb-6 flex w-full justify-center">
+                <Image
+                  src="/static/images/avatar.png"
+                  alt="avatar"
+                  width={140}
+                  height={140}
+                  className="rounded-full border-4 border-white/50 shadow-2xl backdrop-blur-sm transition-transform duration-500 group-hover/card:scale-110 dark:border-gray-800/50"
+                />
+              </CardItem>
               <CardItem translateZ="50" className="w-full text-center">
-                <h1 className="text-4xl leading-tight font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-7xl dark:text-gray-100">
+                <h1 className="bg-gradient-to-b from-gray-900 to-gray-600 bg-clip-text text-4xl font-extrabold tracking-tighter text-transparent sm:text-7xl md:text-8xl dark:from-gray-100 dark:to-gray-400">
                   {dict.site.title}
                 </h1>
               </CardItem>

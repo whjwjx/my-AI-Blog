@@ -2,13 +2,13 @@
 const siteMetadata = {
   title: 'Hua Jiang Blog',
   author: 'Hua Jiang',
-  headerTitle: 'huajiang.wang',
+  headerTitle: 'Hua Jiang Blog',
   description: '不讲冷冰冰的代码，只聊有温度的技术。在这里，AI 是老友，代码是诗行，致力于让每一个人都能读懂技术的温柔。',
   language: 'zh-CN',
   theme: 'system', // system, dark or light
   siteUrl: 'https://huajiang.wang',
   siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
-  siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
+  siteLogo: `${process.env.BASE_PATH || ''}/static/images/avatar.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   email: 'whjwjx@gmail.com',
   github: 'https://github.com/whjwjx',

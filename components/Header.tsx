@@ -1,6 +1,6 @@
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
-import Logo from '@/data/logo.svg'
+import Image from './Image'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
@@ -17,12 +17,18 @@ const Header = ({ dict, locale }: { dict: Dictionary; locale: Locale }) => {
   return (
     <header className={headerClass}>
       <Link href={`/${locale}`} aria-label={siteMetadata.headerTitle}>
-        <div className="flex items-center justify-between">
-          <div className="mr-3">
-            <Logo />
+        <div className="flex items-center justify-between group">
+          <div className="mr-3 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+            <Image
+              src="/static/images/avatar.png"
+              alt="logo"
+              width={42}
+              height={42}
+              className="rounded-full border-2 border-primary-500/20 p-0.5 dark:border-primary-400/20"
+            />
           </div>
           {typeof siteMetadata.headerTitle === 'string' ? (
-            <div className="hidden h-6 text-2xl font-semibold sm:block">
+            <div className="hidden h-6 text-2xl font-bold tracking-tight sm:block transition-colors group-hover:text-primary-500 dark:group-hover:text-primary-400">
               {siteMetadata.headerTitle}
             </div>
           ) : (
