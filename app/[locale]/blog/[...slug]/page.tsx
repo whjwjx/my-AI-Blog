@@ -77,6 +77,13 @@ export async function generateMetadata(props: {
       description: post.summary,
       images: imageList,
     },
+    alternates: {
+      canonical: post.canonicalUrl || './',
+      languages: {
+        en: `/en/blog/${slug}`,
+        'zh-CN': `/zh-CN/blog/${slug}`,
+      },
+    },
   }
 }
 
