@@ -12,7 +12,7 @@ import { Spotlight } from '@/components/ui/Spotlight'
 import { GridBackground } from '@/components/ui/GridBackground'
 import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card'
 import { OrbitingCircles } from '@/components/magicui/orbiting-circles'
-import { Icons } from '@/components/Icons'
+import { Trae, Dify, Claude, OpenClaw, Ollama, Gemini, Glama, MCP } from '@lobehub/icons'
 
 const MAX_DISPLAY = 5
 
@@ -24,19 +24,17 @@ export default function Home({ posts, dict, locale }) {
       <div className="relative min-h-[750px] overflow-hidden border-b border-gray-200 pt-12 pb-32 dark:border-gray-700">
         <GridBackground className="min-h-[750px]">
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <OrbitingCircles iconSize={50} radius={260} speed={0.5} randomSpeed>
-              <Icons.typescript />
-              <Icons.javascript />
-              <Icons.python />
-              <Icons.java />
-              <Icons.ai />
+            <OrbitingCircles iconSize={50} radius={260} speed={0.8} randomSpeed>
+              <Trae.Color size={50} />
+              <Dify.Color size={50} />
+              <Claude.Color size={50} />
+              <OpenClaw.Color size={50} />
             </OrbitingCircles>
-            <OrbitingCircles iconSize={40} radius={400} reverse speed={1.2} randomSpeed>
-              <Icons.typescript />
-              <Icons.javascript />
-              <Icons.python />
-              <Icons.java />
-              <Icons.ai />
+            <OrbitingCircles iconSize={40} radius={400} reverse speed={1.5} randomSpeed>
+              <Ollama size={40} />
+              <Gemini.Color size={40} />
+              <Glama size={40} />
+              <MCP size={40} />
             </OrbitingCircles>
           </div>
           <CardContainer className="inter-var" containerClassName="py-10">

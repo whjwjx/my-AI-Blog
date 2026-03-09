@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import React, { useEffect, useState, useMemo } from 'react'
+import { motion } from 'framer-motion'
 
 export interface OrbitingCirclesProps {
   className?: string
@@ -19,7 +20,7 @@ export function OrbitingCircles({
   children,
   reverse,
   duration = 20,
-  delay = 10,
+  delay = 0,
   radius = 50,
   path = true,
   iconSize = 30,
@@ -32,14 +33,14 @@ export function OrbitingCircles({
     setMounted(true)
   }, [])
 
-  // Generate stable random factors only on the client
   const randomFactors = useMemo(() => {
     if (!mounted || !randomSpeed) return null
-    // Random factor between 0.7 and 1.2 for a more subtle variation
-    return React.Children.map(children, () => 0.7 + Math.random() * 0.5)
+    return React.Children.map(children, () => 0.8 + Math.random() * 0.4)
   }, [mounted, randomSpeed, children])
 
   const calculatedDuration = duration / speed
+
+  if (!mounted) return null
 
   return (
     <>
@@ -67,31 +68,54 @@ export function OrbitingCircles({
       >
         {React.Children.map(children, (child, index) => {
           const angle = (360 / React.Children.count(children)) * index
-
-          // Use random factor if mounted and randomSpeed is enabled, otherwise fallback to 1
           const randomFactor = randomFactors ? randomFactors[index] : 1
           const individualDuration = calculatedDuration / randomFactor
 
           return (
-            <div
+            <motion.div
               style={
                 {
-                  '--duration': individualDuration,
-                  '--radius': radius,
-                  '--angle': angle,
                   '--icon-size': `${iconSize}px`,
-                  '--delay': -delay,
-                  animation: `orbit calc(var(--duration)*1s) linear infinite`,
-                  animationDelay: `calc(var(--delay)*1000ms)`,
-                  animationDirection: reverse ? 'reverse' : 'normal',
+                  position: 'absolute',
+                  display: 'flex',
+                  width: '100%',
+                  height: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 } as React.CSSProperties
               }
-              className={cn(`absolute flex size-full items-center justify-center rounded-full`)}
+              animate={{
+                rotate: reverse ? [angle, angle - 360] : [angle, angle + 360],
+              }}
+              transition={{
+                duration: individualDuration,
+                repeat: Infinity,
+                ease: 'linear',
+                delay: -delay,
+              }}
             >
-              <div className="flex size-[var(--icon-size)] items-center justify-center">
+              <motion.div
+                style={{
+                  width: 'var(--icon-size)',
+                  height: 'var(--icon-size)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                initial={{ y: radius }}
+                animate={{
+                  rotate: reverse ? [-angle, -angle + 360] : [-angle, -angle - 360],
+                }}
+                transition={{
+                  duration: individualDuration,
+                  repeat: Infinity,
+                  ease: 'linear',
+                  delay: -delay,
+                }}
+              >
                 {child}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           )
         })}
       </div>
