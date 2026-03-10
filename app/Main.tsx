@@ -13,6 +13,7 @@ import { GridBackground } from '@/components/ui/GridBackground'
 import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card'
 import { OrbitingCircles } from '@/components/magicui/orbiting-circles'
 import { TypingAnimation } from '@/components/magicui/typing-animation'
+import { TextHoverEffect } from '@/components/ui/text-hover-effect'
 import Image from '@/components/Image'
 import {
   Trae,
@@ -36,7 +37,10 @@ export default function Home({ posts, dict, locale }) {
     <>
       <div className="relative min-h-[700px] overflow-hidden border-b border-gray-200 pt-8 pb-24 dark:border-gray-700">
         <GridBackground className="min-h-[700px]">
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 z-0 flex translate-y-72 items-center justify-center opacity-40">
+            <TextHoverEffect text="AI FOR EVERYTHING" />
+          </div>
+          <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
             <OrbitingCircles iconSize={35} maxIconSize={70} radius={220} speed={0.4} randomSpeed>
               <Trae.Color />
               <Dify.Color />
@@ -59,7 +63,7 @@ export default function Home({ posts, dict, locale }) {
               <MCP />
             </OrbitingCircles>
           </div>
-          <CardContainer className="inter-var" containerClassName="py-4">
+          <CardContainer className="inter-var z-10" containerClassName="py-4">
             <CardBody className="group/card relative h-auto w-auto rounded-xl bg-transparent p-4 dark:bg-transparent">
               <CardItem translateZ="80" className="mb-4 flex w-full justify-center">
                 <Image
