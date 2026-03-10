@@ -180,6 +180,13 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
+  contentDirExclude: [
+    'headerNavLinks.ts',
+    'projectsData.ts',
+    'siteMetadata.js',
+    'logo.svg',
+    'references-data.bib',
+  ],
   documentTypes: [Blog, Authors],
   mdx: {
     cwd: process.cwd(),
