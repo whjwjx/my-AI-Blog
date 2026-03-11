@@ -8,6 +8,7 @@ import {
   type FormEvent,
   type KeyboardEvent,
 } from 'react'
+import { useParams } from 'next/navigation'
 import { ClaudeCode } from '@lobehub/icons'
 import {
   DAILY_SCHEDULE,
@@ -49,6 +50,9 @@ const isStatusQuestion = (input: string) =>
   STATUS_QUESTIONS.some((question) => input.includes(question))
 
 export function ClaudeCodeTerminal() {
+  const params = useParams()
+  const locale = (params?.locale as string) ?? 'zh-CN'
+  const isEnglish = locale.startsWith('en')
   const brandColor = '#d4890a'
   const [isOpen, setIsOpen] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
@@ -193,11 +197,15 @@ export function ClaudeCodeTerminal() {
     window.addEventListener('focus', handleFocus)
 
     if (!welcomeShownRef.current) {
-      showBubble('欢迎来到本站，点我打开终端')
+      showBubble(
+        isEnglish ? 'Welcome to the site, tap to open the terminal' : '欢迎来到本站，点我打开终端'
+      )
       welcomeShownRef.current = true
     }
 
-    const messages = ['需要帮忙吗？', '输入 help 查看指令', '点我打开终端']
+    const messages = isEnglish
+      ? ['Need help?', 'Type help for commands', 'Tap to open the terminal']
+      : ['需要帮忙吗？', '输入 help 查看指令', '点我打开终端']
 
     const canShowBubble = () => {
       const now = Date.now()
@@ -232,7 +240,7 @@ export function ClaudeCodeTerminal() {
       window.removeEventListener('blur', handleBlur)
       window.removeEventListener('focus', handleFocus)
     }
-  }, [isOpen])
+  }, [isOpen, isEnglish])
 
   const schedule = DAILY_SCHEDULE
   const currentMinutes = toMinutes(clock)
@@ -488,7 +496,7 @@ export function ClaudeCodeTerminal() {
         )}
         <div className="relative">
           {bubbleText && (
-            <div className="pointer-events-none absolute top-1/2 right-full mr-3 max-w-[320px] -translate-y-1/2 rounded-lg border border-white/10 bg-gray-900/95 px-4 py-3 text-sm text-gray-100 shadow-xl backdrop-blur">
+            <div className="pointer-events-none absolute top-1/2 right-full mr-3 -translate-y-1/2 rounded-lg border border-white/10 bg-gray-900/95 px-4 py-3 text-sm text-gray-100 shadow-xl backdrop-blur">
               <span className="block leading-relaxed whitespace-nowrap">{bubbleText}</span>
             </div>
           )}

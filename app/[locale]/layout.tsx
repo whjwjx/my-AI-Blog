@@ -12,6 +12,7 @@ import { ThemeProviders } from '../theme-providers'
 import { Metadata } from 'next'
 import { Locale, i18n } from '@/dictionaries/i18n-config'
 import { getDictionary } from '@/dictionaries/get-dictionary'
+import { ClaudeCodeTerminal } from '@/components/ClaudeCodeTerminal'
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -119,6 +120,7 @@ export default async function LocaleLayout(props: {
               <Footer dict={dict} />
             </div>
           </SectionContainer>
+          <ClaudeCodeTerminal />
         </ThemeProviders>
       </body>
     </html>

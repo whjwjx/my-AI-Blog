@@ -11,7 +11,6 @@ import { OrbitingCircles } from '@/components/magicui/orbiting-circles'
 import { TypingAnimation } from '@/components/magicui/typing-animation'
 import { TextHoverEffect } from '@/components/ui/text-hover-effect'
 import Image from '@/components/Image'
-import { ClaudeCodeTerminal } from '@/components/ClaudeCodeTerminal'
 import {
   Trae,
   Dify,
@@ -164,7 +163,6 @@ export default function Home({ posts, dict, locale }) {
           <NewsletterForm />
         </div>
       )}
-      <ClaudeCodeTerminal />
     </>
   )
 }
