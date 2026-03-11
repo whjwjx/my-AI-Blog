@@ -11,21 +11,27 @@
   - 高性能与 SEO 优化。
 
 ## 2. 核心技术栈
-- **框架**: Next.js 15.5 (App Router)
-- **i18n**: 动态路由 `[locale]` + 翻译字典 (dictionaries)
-- **语言**: TypeScript 5.x
-- **样式**: Tailwind CSS 4.x
-- **内容处理**: Contentlayer2 (MDX 处理)
-- **状态管理**: React Context / Hooks (极简全局状态)
-- **包管理器**: Yarn 3.6.1 (使用方式: `node .yarn/releases/yarn-3.6.1.cjs`)
+- **框架**: Next.js 15.5.12 (App Router)
+- **前端**: React 19.2.4
+- **i18n**: 动态路由 `app/[locale]` + 翻译字典 (`dictionaries/*`) + `middleware.ts` 重定向
+- **语言**: TypeScript 5.9.x
+- **样式**: Tailwind CSS 4.1.x
+- **内容处理**: contentlayer2 (MD/MDX) + pliny MDX plugins
+- **UI/动效**: Headless UI / Ant Design / framer-motion / LobeHub icons
+- **包管理器**: Yarn 3.6.1 (`packageManager: yarn@3.6.1`)
 
 ## 3. 关键配置文件
 | 文件路径 | 用途 |
 | :--- | :--- |
-| `data/siteMetadata.js` | **全局配置**: 标题、作者、社交链接、分析、评论配置。 |
-| `contentlayer.config.ts` | **内容模型**: 定义 MDX 文档类型 (Blog, Authors)。 |
-| `next.config.js` | **构建配置**: CSP, Headers, Webpack 插件。 |
-| `tailwind.config.js` | **样式配置**: 颜色、排版、插件 (v4 版本主要隐式处理或通过 postcss)。 |
+| `data/siteMetadata.js` | **站点配置**: 标题、作者、社交链接、分析、评论、搜索等。 |
+| `contentlayer.config.ts` | **内容模型**: Blog/Authors，包含 `language/slug/path` 等计算字段；构建时生成 tag/search 索引。 |
+| `middleware.ts` | **语言检测与重定向**: 根据 Cookie/Accept-Language 把 `/` 与无前缀路径重定向到 `/{locale}`。 |
+| `dictionaries/i18n-config.ts` | **Locale 列表**: `defaultLocale` 与 `locales`。 |
+| `dictionaries/get-dictionary.ts` | **字典加载**: 按 locale 动态 import 对应 JSON。 |
+| `app/[locale]/layout.tsx` | **语言布局入口**: 注入 Header/Footer、ThemeProviders，静态生成 locale 参数。 |
+| `next.config.js` | **构建配置**: Next.js 配置（以仓库实际内容为准）。 |
+| `postcss.config.js` | **Tailwind v4**: PostCSS 管道（`@tailwindcss/postcss`）。 |
+| `eslint.config.mjs` | **代码规范**: ESLint v9 配置入口。 |
 
 ## 4. 编码规范
 - **语言**: 注释和文档必须使用 **简体中文 (zh-CN)**。

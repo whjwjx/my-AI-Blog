@@ -32,9 +32,11 @@ node .yarn/releases/yarn-3.6.1.cjs install
 ## 2. 内容创作流程 (Writing)
 
 1. **新建文章**:
-   在 `data/blog/` 目录下创建 `.md` 或 `.mdx` 文件。
-   
-2. **Frontmatter 模板 (多语言支持)**:
+   - 英文文章放在 `data/blog/en/`。
+   - 中文文章放在 `data/blog/zh-CN/`。
+   - 支持 `.md` 与 `.mdx`。
+
+2. **Frontmatter 模板**:
    ```yaml
    ---
    title: '文章标题'
@@ -42,13 +44,13 @@ node .yarn/releases/yarn-3.6.1.cjs install
    tags: ['Next.js', 'Guide']
    draft: false
    summary: '文章摘要...'
-   language: 'zh-CN'  # 必填: 'en' 或 'zh-CN'
    ---
    ```
+   说明：当前实现会优先从文件路径推导语言（例如 `data/blog/zh-CN/*` -> `language=zh-CN`）。如确有需要也可在 Frontmatter 写 `language`，但推荐用目录来区分。
 
-3. **多语言文章创作策略**:
-   - **单文件多版本**: 在 `data/blog/` 下为同一篇文章创建不同语言版本（如 `my-post.en.mdx` 和 `my-post.zh-CN.mdx`）。
-   - **Slug 匹配**: 确保同一篇文章的不同语言版本具有相同的标识符（通过 Frontmatter 字段或文件名逻辑关联）。
+3. **多语言文章匹配策略（推荐）**:
+   - 为同一篇文章创建两个文件，保持相同的相对 slug。
+   - 示例：`data/blog/en/my-post.md` 与 `data/blog/zh-CN/my-post.md`。
 
 4. **添加图片**:
    将图片放入 `public/static/images/`，引用路径为 `/static/images/filename.png`。
