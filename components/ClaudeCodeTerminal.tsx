@@ -481,12 +481,12 @@ export function ClaudeCodeTerminal() {
   }, [handleResizing, handleResizeEnd, handleWidthResizing, handleWidthResizeEnd])
 
   return (
-    <div className="fixed right-6 bottom-6 z-50">
+    <div className="fixed right-4 bottom-4 z-50 sm:right-6 sm:bottom-6">
       <div className="flex flex-col items-end gap-3">
         {isOpen && (
           <div
-            className="relative overflow-hidden rounded-2xl border border-white/10 bg-gray-900/95 text-gray-100 shadow-2xl backdrop-blur"
-            style={{ width: panelWidth }}
+            className="fixed left-1/2 bottom-20 -translate-x-1/2 overflow-hidden rounded-2xl border border-white/10 bg-gray-900/95 text-gray-100 shadow-2xl backdrop-blur sm:relative sm:left-auto sm:bottom-auto sm:translate-x-0"
+            style={{ width: `min(${panelWidth}px, calc(100vw - 32px))` }}
           >
             <button
               type="button"
@@ -502,54 +502,59 @@ export function ClaudeCodeTerminal() {
               className="absolute top-0 bottom-0 left-0 z-10 w-2"
               style={{ cursor: 'ew-resize' }}
             />
-            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+            <div className="flex items-center justify-between border-b border-white/10 px-2.5 py-1.5 sm:px-4 sm:py-3">
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1">
                   <button
                     type="button"
                     onClick={handleClose}
-                    className="h-2.5 w-2.5 rounded-full bg-red-500"
+                    className="h-2 w-2 rounded-full bg-red-500 sm:h-2.5 sm:w-2.5"
                     aria-label="关闭终端"
                   />
                   <button
                     type="button"
                     onClick={handleMinimize}
-                    className="h-2.5 w-2.5 rounded-full bg-yellow-400"
+                    className="h-2 w-2 rounded-full bg-yellow-400 sm:h-2.5 sm:w-2.5"
                     aria-label="最小化终端"
                   />
                   <button
                     type="button"
                     onClick={handleRestore}
-                    className="h-2.5 w-2.5 rounded-full bg-green-500"
+                    className="h-2 w-2 rounded-full bg-green-500 sm:h-2.5 sm:w-2.5"
                     aria-label="复原终端"
                   />
                 </div>
-                <div className="flex items-center gap-2 text-sm font-semibold">终端</div>
+                <div className="flex items-center gap-2 text-[11px] font-semibold sm:text-sm">
+                  终端
+                </div>
               </div>
-              <div className="text-xs text-gray-400">
+              <div className="text-[9px] text-gray-400 sm:text-xs">
                 Now · {currentStatus.title} · {currentTimeText}
               </div>
             </div>
             {!isMinimized && (
               <>
                 <div
-                  className="thin-scrollbar flex flex-col gap-4 overflow-y-auto px-4 py-4 text-sm"
+                  className="thin-scrollbar flex flex-col gap-2 overflow-y-auto px-2.5 py-2.5 text-[10px] sm:gap-4 sm:px-4 sm:py-4 sm:text-sm"
                   style={{ height: contentHeight }}
                 >
                   {messages.map((message) => (
-                    <div key={message.id} className="flex flex-col gap-2">
+                    <div key={message.id} className="flex flex-col gap-1.5 sm:gap-2">
                       {message.role === 'user' ? (
-                        <div className="flex items-center gap-2 font-mono text-xs text-gray-100">
+                        <div className="flex items-center gap-2 font-mono text-[10px] text-gray-100 sm:text-xs">
                           <span style={{ color: brandColor }}>❯</span>
                           <span>{message.displayContent}</span>
                         </div>
                       ) : (
-                        <div className="space-y-2">
-                          <div className="text-[11px] font-semibold" style={{ color: brandColor }}>
+                        <div className="space-y-1.5 sm:space-y-2">
+                          <div
+                            className="text-[9px] font-semibold sm:text-[11px]"
+                            style={{ color: brandColor }}
+                          >
                             ◆ Claude
                           </div>
                           <div
-                            className="max-w-full overflow-x-auto border-l-2 pl-3 font-mono text-xs leading-relaxed whitespace-pre text-gray-100"
+                            className="max-w-full overflow-x-auto border-l-2 pl-2.5 font-mono text-[10px] leading-relaxed whitespace-pre text-gray-100 sm:pl-3 sm:text-xs"
                             style={{ borderColor: brandColor }}
                           >
                             {message.displayContent}
@@ -559,16 +564,19 @@ export function ClaudeCodeTerminal() {
                     </div>
                   ))}
                   {isWorking && (
-                    <div className="flex items-center gap-2 font-mono text-xs text-gray-400">
+                    <div className="flex items-center gap-2 font-mono text-[10px] text-gray-400 sm:text-xs">
                       <span style={{ color: brandColor }}>{SPINNER_FRAMES[spinnerIndex]}</span>
                       <span>Working…</span>
                     </div>
                   )}
                   <div ref={messagesEndRef} />
                 </div>
-                <form onSubmit={handleSubmit} className="border-t border-white/10 px-3 py-3">
-                  <div className="flex items-center gap-2 rounded-xl bg-white/5 px-3 py-2">
-                    <span className="text-xs" style={{ color: brandColor }}>
+                <form
+                  onSubmit={handleSubmit}
+                  className="border-t border-white/10 px-2.5 py-1.5 sm:px-3 sm:py-3"
+                >
+                  <div className="flex items-center gap-2 rounded-lg bg-white/5 px-2.5 py-1.5 sm:rounded-xl sm:px-3 sm:py-2">
+                    <span className="text-[10px] sm:text-xs" style={{ color: brandColor }}>
                       ❯
                     </span>
                     <input
@@ -576,21 +584,21 @@ export function ClaudeCodeTerminal() {
                       onChange={handleInputChange}
                       onKeyDown={handleInputKeyDown}
                       placeholder="输入指令或问题"
-                      className="w-full bg-transparent text-xs text-gray-100 placeholder:text-gray-500 focus:outline-none"
+                      className="w-full bg-transparent text-[10px] text-gray-100 placeholder:text-gray-500 focus:outline-none sm:text-xs"
                       style={{ caretColor: brandColor }}
                     />
                     <button
                       type="submit"
-                      className="rounded-md bg-white/10 px-3 py-1 text-xs text-gray-200 hover:bg-white/20"
+                      className="rounded-md bg-white/10 px-2 py-1 text-[10px] text-gray-200 hover:bg-white/20 sm:px-3 sm:text-xs"
                     >
                       发送
                     </button>
                   </div>
                 </form>
-                <div className="flex items-center justify-between border-t border-white/10 px-3 py-2 text-[10px] text-gray-400">
+                <div className="flex items-center justify-between border-t border-white/10 px-2.5 py-1.5 text-[8px] text-gray-400 sm:px-3 sm:py-2 sm:text-[10px]">
                   <div className="flex items-center gap-2">
                     <span
-                      className="h-1.5 w-1.5 rounded-full"
+                      className="h-1 w-1 rounded-full sm:h-1.5 sm:w-1.5"
                       style={{ backgroundColor: brandColor }}
                     />
                     <span>claude-terminal.tsx v0.1</span>
@@ -613,17 +621,17 @@ export function ClaudeCodeTerminal() {
         )}
         <div className="relative">
           {bubbleText && (
-            <div className="pointer-events-none absolute top-1/2 right-full mr-3 -translate-y-1/2 rounded-lg border border-white/10 bg-gray-900/95 px-4 py-3 text-sm text-gray-100 shadow-xl backdrop-blur">
+            <div className="pointer-events-none absolute top-1/2 right-full mr-3 -translate-y-1/2 rounded-lg border border-white/10 bg-gray-900/95 px-3 py-2 text-xs text-gray-100 shadow-xl backdrop-blur sm:px-4 sm:py-3 sm:text-sm">
               <span className="block leading-relaxed whitespace-nowrap">{bubbleText}</span>
             </div>
           )}
           <button
             type="button"
             onClick={handleToggleOpen}
-            className="group hover:border-primary-400/60 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-gray-900/90 shadow-xl transition hover:scale-105"
+            className="group hover:border-primary-400/60 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-gray-900/90 shadow-xl transition hover:scale-105 sm:h-14 sm:w-14"
             aria-label="打开 Claude Code 终端"
           >
-            <ClaudeCode.Color className="h-7 w-7 transition group-hover:scale-110" />
+            <ClaudeCode.Color className="h-6 w-6 transition group-hover:scale-110 sm:h-7 sm:w-7" />
           </button>
         </div>
       </div>
