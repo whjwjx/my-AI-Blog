@@ -6,14 +6,15 @@ export type ScheduleItem = {
 }
 
 export const DAILY_SCHEDULE: ScheduleItem[] = [
-  { start: 0, end: 450, title: '休息', description: '深度睡眠与身体恢复。' },
-  { start: 450, end: 540, title: '晨间', description: '起床、洗漱、早餐、整理计划。' },
-  { start: 540, end: 720, title: '深度工作', description: '专注开发与核心事项推进。' },
-  { start: 720, end: 810, title: '午间休息', description: '午餐与短暂休息。' },
-  { start: 810, end: 1110, title: '项目推进', description: '需求处理、编码与协作沟通。' },
-  { start: 1110, end: 1230, title: '晚间充电', description: '阅读、学习与知识整理。' },
-  { start: 1230, end: 1350, title: '创作时间', description: '写作、复盘与灵感输出。' },
-  { start: 1350, end: 1440, title: '放松收尾', description: '放松、整理、准备休息。' },
+  { start: 0, end: 450, title: '睡觉', description: '深度睡眠与身体恢复。' },
+  { start: 450, end: 510, title: '晨间', description: '喝水、跑步、洗漱。' },
+  { start: 510, end: 540, title: '计划与消息', description: '查看消息、写今日计划。' },
+  { start: 540, end: 720, title: '需求讨论', description: '与 Agent 大军激情讨论、分析与设计需求。' },
+  { start: 720, end: 840, title: '午休', description: '午休并查看或更新下午计划。' },
+  { start: 840, end: 1080, title: '代码执行', description: '指挥 Agent 大军写代码。' },
+  { start: 1080, end: 1200, title: '运动休息', description: '休息、健身或跑步。' },
+  { start: 1200, end: 1380, title: '项目与写作', description: '指挥 Agent 大军搞项目、写博客、总结 AI 协同经验。' },
+  { start: 1380, end: 1440, title: '复盘与洗漱', description: '畅想 AI 的未来、复盘、洗漱。' },
 ]
 
 export const STATUS_QUESTIONS = [
