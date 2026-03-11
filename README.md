@@ -1,4 +1,4 @@
-# Tailwind Nextjs Starter Blog
+# My AI Blog
 
 本项目基于 [timlrx/tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) 二次开发，用于快速搭建一个支持多语言（`en` / `zh-CN`）、MDX 写作、搜索与评论的个人博客/技术站点。
 
