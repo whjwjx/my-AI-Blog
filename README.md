@@ -60,8 +60,9 @@ draft: false
 ### 外部大模型 API 接入（规划）
 
 - 推荐接入方式：通过 Next.js Route Handler（例如 `app/api/.../route.ts`）在服务端转发请求；前端仅调用站内 API，避免泄露密钥
-- 环境变量建议：在 `.env.local` 中配置 `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` 等（按你选择的供应商决定），不要把密钥写进代码或提交到仓库
-- 部署注意：如果使用 `EXPORT=1` 进行静态导出（GitHub Pages 工作流默认如此），`app/api/*` 不会在 Pages 上运行；接入外部大模型通常需要改为有服务端能力的部署（如 Vercel/自建 Node 服务/单独后端）
+- 环境变量建议：本地开发使用 `.env.local`，线上部署在平台侧配置环境变量（如 `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`，按你选择的供应商决定）；不要把密钥写进代码或提交到仓库
+- 部署计划：后续将使用 Vercel 部署以获得服务端能力（可运行 `app/api/*`），从而正常接入外部大模型 API
+- 静态导出说明：如果设置 `EXPORT=1` 进行静态导出（如 GitHub Pages 工作流），`app/api/*` 不会运行；Vercel 部署时不要启用 `EXPORT=1`
 
 ## 快速启动
 
