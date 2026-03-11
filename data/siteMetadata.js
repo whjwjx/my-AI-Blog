@@ -7,7 +7,7 @@ const siteMetadata = {
   language: 'zh-CN',
   theme: 'system', // system, dark or light
   siteUrl: 'https://huajiang.wang',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
+  siteRepo: 'https://github.com/whjwjx/my-AI-Blog',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/avatar.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   email: 'whj_cj2020@163.com',
