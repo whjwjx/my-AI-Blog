@@ -85,6 +85,7 @@ export function ClaudeCodeTerminal() {
   const startWidthRef = useRef(0)
   const welcomeShownRef = useRef(false)
   const lastBubbleAtRef = useRef(0)
+  const lastBubbleIndexRef = useRef<number | null>(null)
   const idleTimerRef = useRef<number | null>(null)
   const isIdleRef = useRef(true)
   const isVisibleRef = useRef(true)
@@ -228,9 +229,31 @@ export function ClaudeCodeTerminal() {
         : `站长现在：${current.title}，接下来：${next.title}`
     }
 
+    const buildClockBubble = () => {
+      const now = new Date()
+      const minutes = toMinutes(now)
+      const hours = now.getHours()
+      const period =
+        hours < 6
+          ? '凌晨'
+          : hours < 12
+            ? '早上'
+            : hours < 14
+              ? '中午'
+              : hours < 18
+                ? '下午'
+                : '晚上'
+      return isEnglish
+        ? `Time now: ${formatTime(minutes)}`
+        : `现在是${period}${formatTime(minutes)}`
+    }
+
     const messages = isEnglish
       ? [
           () => 'Need help? I am here.',
+          () => 'Guess what the owner is doing?',
+          () => 'Guess what the owner is thinking?',
+          buildClockBubble,
           buildStatusBubble,
           () => `Email the owner: ${siteMetadata.email}`,
           () => 'Ask me any question, I will try to help.',
@@ -238,6 +261,9 @@ export function ClaudeCodeTerminal() {
         ]
       : [
           () => '有问题可以和我聊聊，我在这里。',
+          () => '猜猜站长在干嘛？',
+          () => '猜猜站长在想什么？',
+          buildClockBubble,
           buildStatusBubble,
           () => `有事邮件联系：${siteMetadata.email}`,
           () => '想看作息？输入 status 或 schedule。',
@@ -256,8 +282,17 @@ export function ClaudeCodeTerminal() {
       const delay = 5000 + Math.random() * 15000
       bubbleLoopRef.current = window.setTimeout(() => {
         if (!isOpen && canShowBubble()) {
-          const next = messages[Math.floor(Math.random() * messages.length)]
+          let nextIndex = Math.floor(Math.random() * messages.length)
+          if (messages.length > 1 && lastBubbleIndexRef.current !== null) {
+            let guard = 0
+            while (nextIndex === lastBubbleIndexRef.current && guard < 6) {
+              nextIndex = Math.floor(Math.random() * messages.length)
+              guard += 1
+            }
+          }
+          const next = messages[nextIndex]
           showBubble(next())
+          lastBubbleIndexRef.current = nextIndex
         }
         scheduleNext()
       }, delay)
