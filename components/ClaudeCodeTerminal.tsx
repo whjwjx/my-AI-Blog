@@ -2,11 +2,13 @@
 
 import {
   useEffect,
+  useCallback,
   useRef,
   useState,
   type ChangeEvent,
   type FormEvent,
   type KeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
 } from 'react'
 import { useParams } from 'next/navigation'
 import { ClaudeCode } from '@lobehub/icons'
@@ -66,6 +68,10 @@ export function ClaudeCodeTerminal() {
   const replyTimerRef = useRef<number | null>(null)
   const bubbleTimerRef = useRef<number | null>(null)
   const bubbleLoopRef = useRef<number | null>(null)
+  const [contentHeight, setContentHeight] = useState(256)
+  const resizingRef = useRef(false)
+  const startYRef = useRef(0)
+  const startHeightRef = useRef(0)
   const welcomeShownRef = useRef(false)
   const lastBubbleAtRef = useRef(0)
   const idleTimerRef = useRef<number | null>(null)
@@ -383,11 +389,51 @@ export function ClaudeCodeTerminal() {
     }, 640)
   }
 
+  const handleResizing = useCallback((e: MouseEvent) => {
+    if (!resizingRef.current) return
+    const delta = startYRef.current - e.clientY
+    const min = 160
+    const max = Math.max(200, Math.min(window.innerHeight - 200, 720))
+    let next = startHeightRef.current + delta
+    if (next < min) next = min
+    if (next > max) next = max
+    setContentHeight(next)
+  }, [])
+
+  const handleResizeEnd = useCallback(() => {
+    resizingRef.current = false
+    window.removeEventListener('mousemove', handleResizing)
+    window.removeEventListener('mouseup', handleResizeEnd)
+  }, [handleResizing])
+
+  const handleResizeStart = (e: ReactMouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    resizingRef.current = true
+    startYRef.current = e.clientY
+    startHeightRef.current = contentHeight
+    window.addEventListener('mousemove', handleResizing)
+    window.addEventListener('mouseup', handleResizeEnd)
+  }
+
+  useEffect(() => {
+    return () => {
+      window.removeEventListener('mousemove', handleResizing)
+      window.removeEventListener('mouseup', handleResizeEnd)
+    }
+  }, [handleResizing, handleResizeEnd])
+
   return (
     <div className="fixed right-6 bottom-6 z-50">
       <div className="flex flex-col items-end gap-3">
         {isOpen && (
-          <div className="w-[420px] overflow-hidden rounded-2xl border border-white/10 bg-gray-900/95 text-gray-100 shadow-2xl backdrop-blur sm:w-[640px]">
+          <div className="relative w-[420px] overflow-hidden rounded-2xl border border-white/10 bg-gray-900/95 text-gray-100 shadow-2xl backdrop-blur sm:w-[640px]">
+            <button
+              type="button"
+              aria-label="调整终端高度"
+              onMouseDown={handleResizeStart}
+              className="absolute top-0 right-0 left-0 z-10 h-2"
+              style={{ cursor: 'ns-resize' }}
+            />
             <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1">
@@ -418,7 +464,10 @@ export function ClaudeCodeTerminal() {
             </div>
             {!isMinimized && (
               <>
-                <div className="flex h-64 flex-col gap-4 overflow-y-auto px-4 py-4 text-sm">
+                <div
+                  className="flex flex-col gap-4 overflow-y-auto px-4 py-4 text-sm"
+                  style={{ height: contentHeight }}
+                >
                   {messages.map((message) => (
                     <div key={message.id} className="flex flex-col gap-2">
                       {message.role === 'user' ? (
