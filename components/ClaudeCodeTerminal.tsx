@@ -18,6 +18,7 @@ import {
   type ScheduleItem,
 } from '@/data/claude-reference/schedule'
 import siteMetadata from '@/data/siteMetadata'
+import { chat } from '@/lib/api/ai'
 
 const SPINNER_FRAMES = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
 
@@ -333,6 +334,9 @@ export function ClaudeCodeTerminal() {
       'help          查看帮助',
       'clear         清空终端内容',
       '',
+      '✨ AI 助手已接入：',
+      '您可以直接在这里输入任何问题与我交流。',
+      '',
       '也可输入：目前网站主人在干嘛？他在忙什么？现在干什么？',
     ].join('\n')
 
@@ -415,7 +419,7 @@ export function ClaudeCodeTerminal() {
     setBubbleText(null)
   }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const trimmed = input.trim()
     if (!trimmed) return
@@ -431,7 +435,7 @@ export function ClaudeCodeTerminal() {
       setInput('')
       return
     }
-    const reply = replyPlan.content
+
     const userId = `${Date.now()}-user`
     setMessages((prev) => [
       ...prev,
@@ -439,10 +443,31 @@ export function ClaudeCodeTerminal() {
     ])
     setIsWorking(true)
     setInput('')
+
     if (replyTimerRef.current) {
       window.clearTimeout(replyTimerRef.current)
     }
-    replyTimerRef.current = window.setTimeout(() => {
+
+    try {
+      let reply = ''
+      const normalized = trimmed.toLowerCase()
+      // 如果是已知指令，则优先使用本地逻辑
+      const isKnownCommand =
+        normalized === 'help' ||
+        normalized === 'whoami' ||
+        normalized === 'schedule' ||
+        normalized === 'status' ||
+        normalized === 'now' ||
+        isStatusQuestion(trimmed)
+
+      if (isKnownCommand) {
+        reply = replyPlan.content
+      } else {
+        // 调用封装好的 AI API 模块
+        const data = await chat(trimmed)
+        reply = data.reply
+      }
+
       setIsWorking(false)
       const assistantId = `${Date.now()}-assistant`
       typingTargetRef.current = { id: assistantId, content: reply }
@@ -451,7 +476,18 @@ export function ClaudeCodeTerminal() {
         { id: assistantId, role: 'assistant', content: reply, displayContent: '' },
       ])
       setTypingMessageId(assistantId)
-    }, 640)
+    } catch (error) {
+      console.error('AI API Error:', error)
+      setIsWorking(false)
+      const assistantId = `${Date.now()}-assistant`
+      const errorReply = '抱歉，我现在连接后端服务时遇到了一点问题。您可以稍后再试，或者尝试使用 help 指令查看可用功能。'
+      typingTargetRef.current = { id: assistantId, content: errorReply }
+      setMessages((prev) => [
+        ...prev,
+        { id: assistantId, role: 'assistant', content: errorReply, displayContent: '' },
+      ])
+      setTypingMessageId(assistantId)
+    }
   }
 
   const handleResizing = useCallback((e: MouseEvent) => {

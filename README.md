@@ -17,6 +17,31 @@
 - 生成标签统计与本地搜索索引（构建时产出 `app/tag-data.json` 与 `public/search.json`）
 - 可配置的站点信息、导航与社交链接（集中在 `data/` 目录）
 
+## AI Agent 架构设计 (Digital Twin)
+
+本博客不仅是一个静态展示空间，更是站长的 **“数字孪生 (Digital Twin)”** 实验场。通过 **JAMstack** 架构，实现了静态内容与动态智能体的完美融合。
+
+### 核心架构图
+
+```mermaid
+graph LR
+    User((访客浏览器)) -- 1. 访问博客 --> GH_Pages[GitHub Pages 静态资源]
+    User -- 2. 交互/提问 --> API_Request[跨域 Fetch 请求]
+    API_Request -- 3. HTTPS 流式传输 --> Your_VPS[独立后端 FastAPI]
+    Your_VPS -- 4. 检索/反思 --> Agent_Logic[Agent 逻辑控制中心]
+    Agent_Logic -- 5. 调用工具 --> Tools[Notion/Git/Blog Index]
+    Agent_Logic -- 6. 推理 --> LLM[DeepSeek / Claude API]
+    LLM -- 7. 返回 Token 流 --> Agent_Logic
+    Agent_Logic -- 8. 转发流 --> User
+```
+
+### 设计理念
+
+1. **静态前端 (Static Frontend)**：利用 Next.js 的静态导出 (`output: export`)，确保博客加载速度、SEO 和零成本托管。
+2. **独立大脑 (Independent Brain)**：后端采用 **FastAPI + LangGraph** 架构，部署在独立服务器上，提供无限的执行时长和复杂的智能体推理逻辑。
+3. **工具链集成 (MCP)**：深度集成站长的 [fastNotionMCP](https://github.com/whjwjx/fastNotionMCP) 和 [getMyCommits](https://github.com/whjwjx/getMyCommits) 工具，让 AI 助手能够实时读写 Notion 和追踪工程进度。
+4. **流式体验**：前端通过 `ReadableStream` 实时处理后端的 Token 输出，实现类似 ChatGPT 的打字机交互体验。
+
 ## 目录说明（常用）
 
 - `app/`：页面与路由（含 `api/newsletter`、`sitemap.ts`、`robots.ts`）
