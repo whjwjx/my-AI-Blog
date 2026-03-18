@@ -25,7 +25,7 @@ export interface ChatRequest {
 export async function chat(message: string): Promise<ChatResponse> {
   const isExternal = !!EXTERNAL_API_URL
   const url = isExternal ? `${EXTERNAL_API_URL}/chat` : `${API_BASE_URL}/chat`
-  
+
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
   }

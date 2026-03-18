@@ -480,7 +480,8 @@ export function ClaudeCodeTerminal() {
       console.error('AI API Error:', error)
       setIsWorking(false)
       const assistantId = `${Date.now()}-assistant`
-      const errorReply = '抱歉，我现在连接后端服务时遇到了一点问题。您可以稍后再试，或者尝试使用 help 指令查看可用功能。'
+      const errorReply =
+        '抱歉，我现在连接后端服务时遇到了一点问题。您可以稍后再试，或者尝试使用 help 指令查看可用功能。'
       typingTargetRef.current = { id: assistantId, content: errorReply }
       setMessages((prev) => [
         ...prev,

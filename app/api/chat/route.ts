@@ -18,9 +18,8 @@ export async function POST(request: Request) {
   const host = request.headers.get('host')
 
   // 确保请求来自本站
-  const isAuthorized = 
-    (!referer || referer.includes(host || '')) && 
-    (!origin || origin.includes(host || ''))
+  const isAuthorized =
+    (!referer || referer.includes(host || '')) && (!origin || origin.includes(host || ''))
 
   if (!isAuthorized) {
     return NextResponse.json({ error: 'Unauthorized request origin' }, { status: 403 })
@@ -41,7 +40,7 @@ export async function POST(request: Request) {
 
     // 3. 转发请求至真实后端
     console.log(`Proxying request to: ${API_URL}/chat`)
-    
+
     const requestHeaders: HeadersInit = {
       'Content-Type': 'application/json',
     }
