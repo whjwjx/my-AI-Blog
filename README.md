@@ -19,20 +19,34 @@
 
 ## AI Agent 架构设计 (Digital Twin)
 
-本博客不仅是一个静态展示空间，更是站长的 **“数字孪生 (Digital Twin)”** 实验场。通过 **JAMstack** 架构，实现了静态内容与动态智能体的完美融合。
+本博客不仅是一个静态展示空间，更是站长的 **“数字孪生 (Digital Twin)”** 实验场。通过 **JAMstack** 架构，实现了静态内容与动态智能体的安全集成。
 
-### 核心架构图
+### 核心交互与安全代理流程
+
+为了保障 API Key 的安全并解决跨域问题，项目采用了 **Server-side Proxy (服务端代理)** 模式：
 
 ```mermaid
-graph LR
-    User((访客浏览器)) -- 1. 访问博客 --> GH_Pages[GitHub Pages 静态资源]
-    User -- 2. 交互/提问 --> API_Request[跨域 Fetch 请求]
-    API_Request -- 3. HTTPS 流式传输 --> Your_VPS[独立后端 FastAPI]
-    Your_VPS -- 4. 检索/反思 --> Agent_Logic[Agent 逻辑控制中心]
-    Agent_Logic -- 5. 调用工具 --> Tools[Notion/Git/Blog Index]
-    Agent_Logic -- 6. 推理 --> LLM[DeepSeek / Claude API]
-    LLM -- 7. 返回 Token 流 --> Agent_Logic
-    Agent_Logic -- 8. 转发流 --> User
+sequenceDiagram
+    participant User as 访客浏览器 (Client)
+    participant Proxy as 博客后端 (Next.js Proxy)
+    participant Backend as AI 后台 (FastAPI/Python)
+    
+    User->>Proxy: 1. 发起聊天请求 (POST /api/chat)
+    Note over User,Proxy: 仅携带 message 内容，无敏感信息
+    
+    rect rgb(240, 240, 240)
+    Note over Proxy: 安全校验层 (Server-side)
+    Proxy->>Proxy: 2. 校验 Referer/Origin (防止盗刷)
+    Proxy->>Proxy: 3. 从环境变量读取 AI_API_KEY
+    end
+    
+    Proxy->>Backend: 4. 转发请求 (注入 X-API-Key Header)
+    Note over Proxy,Backend: 真实后台地址隐藏在服务器内部
+    
+    Backend-->>Proxy: 5. 返回 AI 回复数据
+    Proxy-->>User: 6. 透传回复给前端展示
+    
+    Note over User: 浏览器开发者工具无法查看到 API Key
 ```
 
 ### 设计理念
