@@ -40,6 +40,16 @@ jobs:
         env:
           EXPORT: 1
           UNOPTIMIZED: 1
+          NEXT_PUBLIC_GISCUS_REPO: ${{ secrets.NEXT_PUBLIC_GISCUS_REPO }}
+          NEXT_PUBLIC_GISCUS_REPOSITORY_ID: ${{ secrets.NEXT_PUBLIC_GISCUS_REPOSITORY_ID }}
+          NEXT_PUBLIC_GISCUS_CATEGORY: ${{ secrets.NEXT_PUBLIC_GISCUS_CATEGORY }}
+          NEXT_PUBLIC_GISCUS_CATEGORY_ID: ${{ secrets.NEXT_PUBLIC_GISCUS_CATEGORY_ID }}
+          # AI 相关密钥 (GitHub Pages 静态导出必须使用 NEXT_PUBLIC_ 前缀)
+          NEXT_PUBLIC_AI_API_URL: ${{ secrets.NEXT_PUBLIC_AI_API_URL }}
+          NEXT_PUBLIC_AI_API_KEY: ${{ secrets.NEXT_PUBLIC_AI_API_KEY }}
+          # 如果有其他密钥，也在这里依次添加
+          # MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+          # ...
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
