@@ -52,10 +52,6 @@ export async function POST(request: Request) {
       headers: requestHeaders,
       body: JSON.stringify({ message }),
     })
-      method: 'POST',
-      headers: requestHeaders,
-      body: JSON.stringify({ message }),
-    })
 
     if (!response.ok) {
       const errorText = await response.text()
