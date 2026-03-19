@@ -122,15 +122,18 @@ export function ClaudeCodeTerminal() {
   }, [])
 
   useEffect(() => {
+    const replyTimer = replyTimerRef.current
+    const bubbleTimer = bubbleTimerRef.current
+    const bubbleLoop = bubbleLoopRef.current
     return () => {
-      if (replyTimerRef.current) {
-        window.clearTimeout(replyTimerRef.current)
+      if (replyTimer) {
+        window.clearTimeout(replyTimer)
       }
-      if (bubbleTimerRef.current) {
-        window.clearTimeout(bubbleTimerRef.current)
+      if (bubbleTimer) {
+        window.clearTimeout(bubbleTimer)
       }
-      if (bubbleLoopRef.current) {
-        window.clearTimeout(bubbleLoopRef.current)
+      if (bubbleLoop) {
+        window.clearTimeout(bubbleLoop)
       }
     }
   }, [])

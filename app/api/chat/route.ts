@@ -40,7 +40,7 @@ export async function POST(request: Request) {
 
     const requestHeaders = new Headers()
     requestHeaders.set('Content-Type', 'application/json')
-    
+
     if (API_KEY) {
       requestHeaders.set('X-API-Key', API_KEY)
     } else {
