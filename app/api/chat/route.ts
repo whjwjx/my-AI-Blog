@@ -5,10 +5,11 @@ import { NextResponse } from 'next/server'
  * 作用：隐藏真实后台地址，防止 API 被直接调用，解决跨域问题。
  */
 export async function POST(request: Request) {
-  const API_URL = process.env.AI_API_URL
+  const API_URL = process.env.AI_API_URL?.replace(/\/$/, '')
   const API_KEY = process.env.AI_API_KEY
 
   if (!API_URL) {
+    console.error('AI_API_URL is missing in environment variables')
     return NextResponse.json({ error: 'AI_API_URL is not configured' }, { status: 500 })
   }
 
@@ -22,6 +23,7 @@ export async function POST(request: Request) {
     (!referer || referer.includes(host || '')) && (!origin || origin.includes(host || ''))
 
   if (!isAuthorized) {
+    console.warn('Unauthorized request origin:', { referer, origin, host })
     return NextResponse.json({ error: 'Unauthorized request origin' }, { status: 403 })
   }
 
@@ -39,7 +41,8 @@ export async function POST(request: Request) {
     }
 
     // 3. 转发请求至真实后端
-    console.log(`Proxying request to: ${API_URL}/chat`)
+    const backendUrl = `${API_URL}/chat`
+    console.log(`Proxying request to: ${backendUrl}`)
 
     const requestHeaders: HeadersInit = {
       'Content-Type': 'application/json',
@@ -47,12 +50,11 @@ export async function POST(request: Request) {
 
     if (API_KEY) {
       requestHeaders['X-API-Key'] = API_KEY
-      console.log('Using API Key: [Configured]')
     } else {
-      console.warn('Using API Key: [MISSING] - Check your .env.local')
+      console.warn('AI_API_KEY is missing in environment variables')
     }
 
-    const response = await fetch(`${API_URL}/chat`, {
+    const response = await fetch(backendUrl, {
       method: 'POST',
       headers: requestHeaders,
       body: JSON.stringify({ message }),
