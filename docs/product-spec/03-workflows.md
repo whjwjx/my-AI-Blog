@@ -57,10 +57,13 @@ node .yarn/releases/yarn-3.6.1.cjs install
 
 ## 3. 运维部署 (Operations)
 
-### 环境变量
-在 `.env` 文件中配置：
-- `NEXT_PUBLIC_GISCUS_REPO`: 评论系统仓库
-- `NEXT_UMAMI_ID`: 统计 ID
+### Vercel 部署 (当前方式)
+1. **GitHub 集成**: 将仓库导入 Vercel 即可实现全自动 CI/CD。
+2. **环境变量**: 在 Vercel 控制台设置：
+   - `NEXT_PUBLIC_GISCUS_REPO`: 评论系统仓库
+   - `NEXT_UMAMI_ID`: 统计 ID
+   - `AI_API_KEY`: 如使用了 AI Proxy，需配置此项。
+3. **构建命令**: `node .yarn/releases/yarn-3.6.1.cjs build` (Vercel 默认通常能识别，但最好指定路径)。
 
 ### Docker 部署 (可选)
 参考 `faq/deploy-with-docker.md`。

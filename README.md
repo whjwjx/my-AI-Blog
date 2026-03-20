@@ -7,7 +7,7 @@
 - 技术栈：Next.js（App Router）+ React + TypeScript + Tailwind CSS
 - 内容体系：Contentlayer2 驱动的 MDX（Frontmatter + 代码高亮 + 数学公式 + 引用/参考文献等）
 - 站点能力：SEO（sitemap/robots）、RSS、暗色模式、站内搜索（kbar）、评论（Giscus，可选）
-- 部署方式：默认兼容 GitHub Pages 的静态导出（`EXPORT=1`），也可按需改为服务端部署
+- 部署方式：目前部署于 Vercel，支持服务端渲染与 API 代理，不再使用静态导出模式
 
 ## 主要特性
 
@@ -51,7 +51,7 @@ sequenceDiagram
 
 ### 设计理念
 
-1. **静态前端 (Static Frontend)**：利用 Next.js 的静态导出 (`output: export`)，确保博客加载速度、SEO 和零成本托管。
+1. **高性能前端**：基于 Next.js 部署于 Vercel，通过 SSR/ISR 结合静态生成的优势，确保加载速度与 SEO，同时获得服务端能力。
 2. **独立大脑 (Independent Brain)**：后端采用 **FastAPI + LangGraph** 架构，部署在独立服务器上，提供无限的执行时长和复杂的智能体推理逻辑。
 3. **工具链集成 (MCP)**：深度集成站长的 [fastNotionMCP](https://github.com/whjwjx/fastNotionMCP) 和 [getMyCommits](https://github.com/whjwjx/getMyCommits) 工具，让 AI 助手能够实时读写 Notion 和追踪工程进度。
 4. **流式体验**：前端通过 `ReadableStream` 实时处理后端的 Token 输出，实现类似 ChatGPT 的打字机交互体验。
@@ -100,8 +100,8 @@ draft: false
 
 - 推荐接入方式：通过 Next.js Route Handler（例如 `app/api/.../route.ts`）在服务端转发请求；前端仅调用站内 API，避免泄露密钥
 - 环境变量建议：本地开发使用 `.env.local`，线上部署在平台侧配置环境变量（如 `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`，按你选择的供应商决定）；不要把密钥写进代码或提交到仓库
-- 部署计划：后续将使用 Vercel 部署以获得服务端能力（可运行 `app/api/*`），从而正常接入外部大模型 API
-- 静态导出说明：如果设置 `EXPORT=1` 进行静态导出（如 GitHub Pages 工作流），`app/api/*` 不会运行；Vercel 部署时不要启用 `EXPORT=1`
+- 部署状态：已使用 Vercel 部署，通过服务端路由处理器 (Route Handlers) 运行 `app/api/*`，从而安全地接入外部大模型 API。
+- 静态导出说明：目前不建议使用 `EXPORT=1`（静态导出），否则 `app/api/*` 将失效。Vercel 部署已默认支持服务端功能。
 
 ## 快速启动
 

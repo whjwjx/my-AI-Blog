@@ -43,5 +43,5 @@ root/
 - **内容匹配**: 文章/作者按 `language` 字段与当前 `[locale]` 过滤；缺失时可按需要实现回退策略（当前以过滤结果为准）。
 
 ## 4. 部署架构
-- **平台**: Vercel (推荐) 或 静态服务器 (Docker/Nginx)。
-- **CI/CD**: GitHub Actions (`.github/workflows/pages.yml`) 负责构建和部署到 GitHub Pages (当前配置)。
+- **平台**: Vercel (当前部署)。
+- **CI/CD**: Vercel Git Integration 自动构建部署。
