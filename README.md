@@ -91,17 +91,25 @@ draft: false
 
 站点内置一个 Claude Code 风格的浮动终端组件，用于提供“AI 助手”式的站内交互体验（右下角入口）。
 
-- 组件位置：`components/ClaudeCodeTerminal.tsx`（在 `app/[locale]/layout.tsx` 中全站挂载）
-- 当前能力：偏演示/交互，暂未接入外部大模型 API；支持 `help`、`status/now`、`schedule`、`whoami`、`clear` 等指令
-- 自定义方式：作息与状态文案在 `data/claude-reference/schedule.ts`；联系方式读取 `data/siteMetadata.js` 的 `email`
-- 关闭方式：删除 `app/[locale]/layout.tsx` 中的 `<ClaudeCodeTerminal />` 引用与渲染即可
+- **组件位置**：[ClaudeCodeTerminal.tsx](file:///d:/github_items/nextjs-starter-blog/components/ClaudeCodeTerminal.tsx)（在 [layout.tsx](file:///d:/github_items/nextjs-starter-blog/app/%5Blocale%5D/layout.tsx) 中全站挂载）。
+- **当前核心功能**：
+  - **作者动态查询**：支持查询站长的实时作息、当前状态（输入 `status`、`now` 或提问“在忙什么？”）。
+  - **指令交互**：内置 `help`（帮助）、`schedule`（完整作息表）、`whoami`（身份查询）、`clear`（清空内容）等指令。
+  - **基础对话**：支持简单的问候与内置逻辑回复。
+- **技术原理**：
+  - **本地逻辑优先**：对于预设的指令和状态查询，组件会直接读取 [schedule.ts](file:///d:/github_items/nextjs-starter-blog/data/claude-reference/schedule.ts) 进行响应。
+  - **AI 服务转发**：对于非预设指令的通用提问，组件通过 [ai.ts](file:///d:/github_items/nextjs-starter-blog/lib/api/ai.ts) 调用本地 [route.ts](file:///d:/github_items/nextjs-starter-blog/app/api/chat/route.ts) 代理，安全地转发至远程 AI 后台进行回复。
+- **自定义方式**：
+  - **作息与状态**：在 [schedule.ts](file:///d:/github_items/nextjs-starter-blog/data/claude-reference/schedule.ts) 中修改。
+  - **联系方式**：读取 [siteMetadata.js](file:///d:/github_items/nextjs-starter-blog/data/siteMetadata.js) 中的 `email`。
+- **关闭方式**：删除 [layout.tsx](file:///d:/github_items/nextjs-starter-blog/app/%5Blocale%5D/layout.tsx) 中的 `<ClaudeCodeTerminal />` 引用与渲染即可。
 
-### 外部大模型 API 接入（规划）
+### AI 后台接入 (Digital Twin)
 
-- 推荐接入方式：通过 Next.js Route Handler（例如 `app/api/.../route.ts`）在服务端转发请求；前端仅调用站内 API，避免泄露密钥
-- 环境变量建议：本地开发使用 `.env.local`，线上部署在平台侧配置环境变量（如 `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`，按你选择的供应商决定）；不要把密钥写进代码或提交到仓库
-- 部署状态：已使用 Vercel 部署，通过服务端路由处理器 (Route Handlers) 运行 `app/api/*`，从而安全地接入外部大模型 API。
-- 静态导出说明：目前不建议使用 `EXPORT=1`（静态导出），否则 `app/api/*` 将失效。Vercel 部署已默认支持服务端功能。
+为了实现更深度的“数字孪生”交互，本项目支持接入外部大模型：
+- **安全代理**：前端仅调用站内 `/api/chat`，由服务端注入 `AI_API_KEY` 并转发，确保密钥不泄露。
+- **部署要求**：需在 Vercel 或支持 Node.js Server 的环境部署，以运行服务端路由处理器。
+- **环境变量**：在部署平台配置 `AI_API_URL` 和 `AI_API_KEY`。
 
 ## 快速启动
 
