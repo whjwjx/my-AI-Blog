@@ -629,7 +629,7 @@ export function ClaudeCodeTerminal() {
                             ◆ Claude
                           </div>
                           <div
-                            className="max-w-full overflow-x-hidden border-l-2 pl-2.5 font-mono text-[10px] leading-relaxed whitespace-pre-wrap break-words text-gray-100 sm:pl-3 sm:text-xs"
+                            className="max-w-full overflow-x-hidden border-l-2 pl-2.5 font-mono text-[10px] leading-relaxed break-words whitespace-pre-wrap text-gray-100 sm:pl-3 sm:text-xs"
                             style={{ borderColor: brandColor }}
                           >
                             {message.displayContent}
@@ -696,8 +696,10 @@ export function ClaudeCodeTerminal() {
         )}
         <div className="relative">
           {bubbleText && (
-            <div className="pointer-events-none absolute top-1/2 right-full mr-3 -translate-y-1/2 max-w-[200px] sm:max-w-[300px] rounded-lg border border-white/10 bg-gray-900/95 px-3 py-2 text-xs text-gray-100 shadow-xl backdrop-blur sm:px-4 sm:py-3 sm:text-sm">
-              <span className="block leading-relaxed whitespace-pre-wrap break-words">{bubbleText}</span>
+            <div className="pointer-events-none absolute top-1/2 right-full mr-3 max-w-[200px] -translate-y-1/2 rounded-lg border border-white/10 bg-gray-900/95 px-3 py-2 text-xs text-gray-100 shadow-xl backdrop-blur sm:max-w-[300px] sm:px-4 sm:py-3 sm:text-sm">
+              <span className="block leading-relaxed break-words whitespace-pre-wrap">
+                {bubbleText}
+              </span>
             </div>
           )}
           <button
