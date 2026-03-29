@@ -9,7 +9,7 @@ const projectsData: Record<string, Project[]> = {
   en: [
     {
       title: 'FastAgent',
-      description: `A fast and lightweight AI agent framework.`,
+      description: `A lightweight, multi-user AI assistant platform based on an AI Agent architecture and extreme front-end/back-end separation, using LLMs as the central router for tasks.`,
       imgSrc: '/static/images/fastagent-cover.png',
       href: 'https://github.com/whjwjx/FastAgent',
     },
@@ -41,7 +41,7 @@ const projectsData: Record<string, Project[]> = {
   'zh-CN': [
     {
       title: 'FastAgent',
-      description: `一个快速且轻量的 AI Agent 框架。`,
+      description: `一个基于大模型路由中枢与前后端极致分离架构的轻量级多用户 AI 助手平台。前端零业务逻辑，所有“思考”与“行动”由后端大模型中枢承载。`,
       imgSrc: '/static/images/fastagent-cover.png',
       href: 'https://github.com/whjwjx/FastAgent',
     },
