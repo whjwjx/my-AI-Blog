@@ -8,6 +8,12 @@ interface Project {
 const projectsData: Record<string, Project[]> = {
   en: [
     {
+      title: 'FastAgent',
+      description: `A fast and lightweight AI agent framework.`,
+      imgSrc: '/static/images/fastagent-cover.png',
+      href: 'https://github.com/whjwjx/FastAgent',
+    },
+    {
       title: 'AI-Native Developer Showcase',
       description: `A showcase of real-world AI-collaborative development, featuring engineering practices, performance data, and methodology summaries in collaboration with AI tools (Trae, OpenCode, Claude, Gemini).`,
       imgSrc: '/static/images/ai-showcase-cover.png',
@@ -33,6 +39,12 @@ const projectsData: Record<string, Project[]> = {
     },
   ],
   'zh-CN': [
+    {
+      title: 'FastAgent',
+      description: `一个快速且轻量的 AI Agent 框架。`,
+      imgSrc: '/static/images/fastagent-cover.png',
+      href: 'https://github.com/whjwjx/FastAgent',
+    },
     {
       title: 'AI 协同开发实战录',
       description: `本仓库是一个 AI 协同开发的展示空间，记录了与 AI（Trae, OpenCode, Claude, Gemini）深度协同的工程实践、效能数据及方法论沉淀。`,
