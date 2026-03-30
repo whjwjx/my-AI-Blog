@@ -75,7 +75,7 @@ const computedFields: ComputedFields = {
       if (parts.length > 2 && ['en', 'zh-CN'].includes(parts[1])) {
         return parts[1]
       }
-      return doc.language || 'en'
+      return doc.language || 'zh-CN'
     },
   },
   filePath: {
@@ -94,7 +94,7 @@ async function createTagCount(allBlogs) {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
         const formattedTag = slug(tag)
-        const tagKey = `${file.language || 'en'}-${formattedTag}`
+        const tagKey = `${file.language || 'zh-CN'}-${formattedTag}`
         if (tagKey in tagCount) {
           tagCount[tagKey] += 1
         } else {
@@ -136,7 +136,7 @@ export const Blog = defineDocumentType(() => ({
     layout: { type: 'string' },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
-    language: { type: 'string', default: 'en' },
+    language: { type: 'string', default: 'zh-CN' },
   },
   computedFields: {
     ...computedFields,
